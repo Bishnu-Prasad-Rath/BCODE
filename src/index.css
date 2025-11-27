@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ultra-simple fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+  opacity: 0;
+}
+
+/* Simple delays */
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+/* Add to your global CSS */
+.writing-mode-vertical {
+  writing-mode: vertical-rl;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.track {
+  scroll-behavior: smooth;
+}
+
+.project-card {
+  transition: all 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Enhanced Mobile responsiveness */
+@media (max-width: 767px) {
+  .track {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+  
+  .project-card {
+    width: 100% !important;
+    scroll-snap-align: center;
+    max-width: 100%;
+  }
+  
+  /* Prevent horizontal scroll on mobile */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+}
+
+/* Tablet responsiveness */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .project-card {
+    scroll-snap-align: center;
+  }
+}
+
+/* Smooth scaling for all elements */
+* {
+  box-sizing: border-box;
+}
+
+/* Ensure images and embeds are responsive */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+/* Custom scale utilities for very small sizes */
+.scale-40 {
+  transform: scale(0.4);
+}
+
+.scale-45 {
+  transform: scale(0.45);
+}
+
+.scale-60 {
+  transform: scale(0.6);
+}
+
+.scale-65 {
+  transform: scale(0.65);
+}
+
+/* Extra small breakpoint */
+@media (min-width: 375px) {
+  .xs\:h-\[220px\] {
+    height: 220px;
+  }
+  
+  .xs\:scale-65 {
+    transform: scale(0.65);
+  }
+}
+/* Force Spline iframe to be responsive */
+.spline-container iframe {
+  width: 100% !important;
+  height: 100% !important;
+  transform: scale(1.5) !important; /* Force scale up */
+}
+
+/* Mobile specific fixes */
+@media (max-width: 768px) {
+  .spline-container iframe {
+    transform: scale(2.5) !important; /* Even more scale on mobile */
+  }
+}
+/* Mobile Menu Animations */
+.mobile-menu-enter {
+  transform: translateX(-100%);
+}
+
+.mobile-menu-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms ease-out;
+}
+
+.mobile-menu-exit {
+  transform: translateX(0);
+}
+
+.mobile-menu-exit-active {
+  transform: translateX(-100%);
+  transition: transform 300ms ease-in;
+}
+
+/* Menu Item Animations */
+.menu-item {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.3s ease;
+}
+
+.menu-item.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s ease-out forwards;
+}
