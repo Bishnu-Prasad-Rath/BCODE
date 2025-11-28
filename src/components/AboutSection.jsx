@@ -1,21 +1,43 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useState, useEffect, useCallback } from 'react';
 
 const AboutSection = () => {
-  // Multiple intersection observers for better scroll-triggered animations
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Debounced mobile detection
+  const checkMobile = useCallback(() => {
+    setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+  }, []);
+
+  useEffect(() => {
+    checkMobile();
+    let resizeTimeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(checkMobile, 250);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(resizeTimeout);
+    };
+  }, [checkMobile]);
+
+  // Optimized intersection observers with mobile thresholds
   const [headerRef, headerInView] = useInView({
     triggerOnce: true,
-    threshold: 0.3,
+    threshold: isMobile ? 0.1 : 0.3,
   });
 
   const [storyRef, storyInView] = useInView({
     triggerOnce: true,
-    threshold: 0.2,
+    threshold: isMobile ? 0.1 : 0.2,
   });
 
   const [skillsRef, skillsInView] = useInView({
     triggerOnce: true,
-    threshold: 0.2,
+    threshold: isMobile ? 0.1 : 0.2,
   });
 
   const skills = [
@@ -33,62 +55,66 @@ const AboutSection = () => {
     { number: "5+", label: "Technologies" },
   ];
 
-  // Animation variants for reusable animations
+  // Performance-optimized animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
+        staggerChildren: isMobile ? 0.1 : 0.2,
+        delayChildren: isMobile ? 0.1 : 0.3
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: isMobile ? 15 : 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: "easeOut"
+        duration: isMobile ? 0.4 : 0.6,
+        ease: "easeOut",
+        willChange: "transform, opacity"
       }
     }
   };
 
   const slideInLeft = {
-    hidden: { opacity: 0, x: -80 },
+    hidden: { opacity: 0, x: isMobile ? -40 : -80 },
     visible: {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 0.8,
-        ease: "easeOut"
+        duration: isMobile ? 0.5 : 0.8,
+        ease: "easeOut",
+        willChange: "transform, opacity"
       }
     }
   };
 
   const slideInRight = {
-    hidden: { opacity: 0, x: 80 },
+    hidden: { opacity: 0, x: isMobile ? 40 : 80 },
     visible: {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 0.8,
-        ease: "easeOut"
+        duration: isMobile ? 0.5 : 0.8,
+        ease: "easeOut",
+        willChange: "transform, opacity"
       }
     }
   };
 
   const scaleIn = {
-    hidden: { opacity: 0, scale: 0.8 },
+    hidden: { opacity: 0, scale: isMobile ? 0.9 : 0.8 },
     visible: {
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 0.6,
-        ease: "backOut"
+        duration: isMobile ? 0.4 : 0.6,
+        ease: "backOut",
+        willChange: "transform, opacity"
       }
     }
   };
@@ -98,112 +124,117 @@ const AboutSection = () => {
     visible: (level) => ({
       width: `${level}%`,
       transition: {
-        duration: 1.5,
+        duration: isMobile ? 1 : 1.5,
         ease: "easeOut",
-        delay: 0.5
+        delay: isMobile ? 0.2 : 0.5,
+        willChange: "width"
       }
     })
   };
 
   return (
-    <section id="about" className="min-h-screen py-20 bg-black relative overflow-hidden">
-      {/* Enhanced Background Effects */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 0.3, scale: 1 }}
-        transition={{ duration: 2, ease: "easeOut" }}
-        className="absolute top-1/4 right-10 w-72 h-72 bg-purple-600/20 rounded-full blur-3xl"
-      />
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 0.2, scale: 1 }}
-        transition={{ duration: 2, delay: 0.5, ease: "easeOut" }}
-        className="absolute bottom-1/4 left-10 w-96 h-96 bg-red-600/10 rounded-full blur-3xl"
-      />
+    <section id="about" className="min-h-screen py-12 md:py-20 bg-black relative overflow-hidden transform-gpu">
+      {/* Performance-optimized Background Effects */}
+      {!isMobile && (
+        <>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 0.3, scale: 1 }}
+            transition={{ duration: 2, ease: "easeOut" }}
+            className="absolute top-1/4 right-10 w-72 h-72 bg-purple-600/20 rounded-full blur-3xl"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 0.2, scale: 1 }}
+            transition={{ duration: 2, delay: 0.5, ease: "easeOut" }}
+            className="absolute bottom-1/4 left-10 w-96 h-96 bg-red-600/10 rounded-full blur-3xl"
+          />
+        </>
+      )}
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header Section with Enhanced Animation */}
+        {/* Header Section - Performance Optimized */}
         <motion.div
           ref={headerRef}
           initial="hidden"
           animate={headerInView ? "visible" : "hidden"}
           variants={containerVariants}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20 transform-gpu"
         >
           <motion.h2
             variants={itemVariants}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6"
+            className="text-3xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 transform-gpu will-change-transform"
           >
             About <span className="bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">Me</span>
           </motion.h2>
           
           <motion.div
             variants={itemVariants}
-            className="w-24 h-1 bg-gradient-to-r from-red-500 to-pink-600 mx-auto mb-8"
+            className="w-20 md:w-24 h-1 bg-gradient-to-r from-red-500 to-pink-600 mx-auto mb-6 md:mb-8 transform-gpu"
           />
           
           <motion.p
             variants={itemVariants}
-            className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 transform-gpu will-change-transform"
           >
             Passionate Full Stack Developer crafting digital experiences that make a difference
           </motion.p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left Column - Story with Staggered Animations */}
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-start">
+          {/* Left Column - Story with Mobile Optimizations */}
           <motion.div
             ref={storyRef}
             initial="hidden"
             animate={storyInView ? "visible" : "hidden"}
             variants={slideInLeft}
-            className="space-y-8"
+            className="space-y-6 md:space-y-8 transform-gpu"
           >
             <motion.h3
               variants={itemVariants}
-              className="text-3xl md:text-4xl font-bold text-white"
+              className="text-2xl md:text-4xl font-bold text-white px-4 md:px-0 transform-gpu will-change-transform"
             >
               My <span className="bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent">Journey</span>
             </motion.h3>
             
             <motion.div
               variants={containerVariants}
-              className="space-y-6 text-gray-300 text-lg leading-relaxed"
+              className="space-y-4 md:space-y-6 text-gray-300 text-base md:text-lg leading-relaxed px-4 md:px-0 transform-gpu"
             >
-              <motion.p variants={itemVariants}>
+              <motion.p variants={itemVariants} className="transform-gpu will-change-transform">
                 Hello! I'm <span className="text-pink-400 font-semibold">Bishnu</span>, a passionate Full Stack Developer 
                 with a love for creating beautiful and functional web applications. My journey in web development 
                 started from B.Tech 1st year, and since then I've been constantly learning and evolving.
               </motion.p>
               
-              <motion.p variants={itemVariants}>
+              <motion.p variants={itemVariants} className="transform-gpu will-change-transform">
                 I specialize in modern technologies like <span className="text-red-400 font-medium">React</span>, <span className="text-blue-400 font-medium">Node.js</span>, 
                 and <span className="text-cyan-400 font-medium">Tailwind CSS</span>. I believe in writing clean, efficient code 
                 and creating user experiences that are both visually appealing and highly functional.
               </motion.p>
               
-              <motion.p variants={itemVariants}>
+              <motion.p variants={itemVariants} className="transform-gpu will-change-transform">
                 When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, 
                 or working on personal projects that challenge my skills and creativity.
               </motion.p>
             </motion.div>
 
-            {/* Stats Grid with Enhanced Animations */}
+            {/* Stats Grid - Performance Optimized */}
             <motion.div
               variants={containerVariants}
-              className="grid grid-cols-2 gap-6 mt-12"
+              className="grid grid-cols-2 gap-4 md:gap-6 mt-8 md:mt-12 transform-gpu"
             >
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
                   variants={scaleIn}
                   custom={index}
-                  whileHover={{ 
+                  whileHover={!isMobile ? { 
                     scale: 1.05,
                     y: -5,
                     transition: { duration: 0.3 }
-                  }}
-                  className="text-center p-6 bg-gray-900/50 rounded-2xl border border-gray-700 hover:border-pink-500/50 hover:shadow-2xl hover:shadow-pink-500/20 transition-all duration-300 backdrop-blur-sm"
+                  } : {}}
+                  className="text-center p-4 md:p-6 bg-gray-900/50 rounded-xl md:rounded-2xl border border-gray-700 backdrop-blur-sm transform-gpu will-change-transform"
                 >
                   <motion.div
                     initial={{ scale: 0 }}
@@ -211,17 +242,21 @@ const AboutSection = () => {
                     transition={{ 
                       type: "spring", 
                       stiffness: 200, 
-                      delay: 0.8 + index * 0.2 
+                      delay: isMobile ? 0.3 + index * 0.1 : 0.8 + index * 0.2,
+                      willChange: "transform"
                     }}
-                    className="text-3xl font-bold bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent"
+                    className="text-xl md:text-3xl font-bold bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent"
                   >
                     {stat.number}
                   </motion.div>
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={storyInView ? { opacity: 1 } : {}}
-                    transition={{ delay: 1 + index * 0.2 }}
-                    className="text-gray-400 text-sm mt-2"
+                    transition={{ 
+                      delay: isMobile ? 0.5 + index * 0.1 : 1 + index * 0.2,
+                      willChange: "opacity"
+                    }}
+                    className="text-gray-400 text-xs md:text-sm mt-1 md:mt-2"
                   >
                     {stat.label}
                   </motion.div>
@@ -230,100 +265,108 @@ const AboutSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Skills with Enhanced Progress Animations */}
+          {/* Right Column - Skills with Performance Optimizations */}
           <motion.div
             ref={skillsRef}
             initial="hidden"
             animate={skillsInView ? "visible" : "hidden"}
             variants={slideInRight}
-            className="space-y-10"
+            className="space-y-8 md:space-y-10 px-4 md:px-0 transform-gpu"
           >
-            <motion.div variants={itemVariants}>
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
+            <motion.div variants={itemVariants} className="transform-gpu will-change-transform">
+              <h3 className="text-2xl md:text-4xl font-bold text-white mb-3">
                 My <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Skills</span>
               </h3>
-              <p className="text-gray-400 text-lg">
+              <p className="text-gray-400 text-base md:text-lg">
                 Technologies I work with to bring ideas to life
               </p>
             </motion.div>
 
-            {/* Skills with Enhanced Progress Bars */}
+            {/* Skills with Optimized Progress Bars */}
             <motion.div
               variants={containerVariants}
-              className="space-y-8"
+              className="space-y-6 md:space-y-8 transform-gpu"
             >
               {skills.map((skill, index) => (
                 <motion.div
                   key={skill.name}
                   variants={itemVariants}
                   custom={index}
-                  className="space-y-3 group"
+                  className="space-y-2 md:space-y-3 transform-gpu will-change-transform"
                 >
                   <div className="flex justify-between items-center">
                     <motion.span 
                       initial={{ opacity: 0, x: -20 }}
                       animate={skillsInView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ delay: 0.3 + index * 0.1 }}
-                      className="text-white font-medium text-lg"
+                      transition={{ 
+                        delay: isMobile ? 0.1 + index * 0.05 : 0.3 + index * 0.1,
+                        willChange: "transform, opacity"
+                      }}
+                      className="text-white font-medium text-base md:text-lg"
                     >
                       {skill.name}
                     </motion.span>
                     <motion.span
                       initial={{ opacity: 0 }}
                       animate={skillsInView ? { opacity: 1 } : {}}
-                      transition={{ delay: 0.8 + index * 0.1 }}
-                      className="text-gray-400 text-sm font-mono"
+                      transition={{ 
+                        delay: isMobile ? 0.4 + index * 0.05 : 0.8 + index * 0.1,
+                        willChange: "opacity"
+                      }}
+                      className="text-gray-400 text-xs md:text-sm font-mono"
                     >
                       {skill.level}%
                     </motion.span>
                   </div>
                   
-                  <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+                  <div className="w-full bg-gray-800 rounded-full h-2 md:h-3 overflow-hidden transform-gpu">
                     <motion.div
                       custom={skill.level}
                       variants={progressBarAnimation}
                       initial="hidden"
                       animate={skillsInView ? "visible" : "hidden"}
-                      className={`h-3 rounded-full bg-gradient-to-r ${skill.color} shadow-lg group-hover:shadow-xl group-hover:brightness-110 transition-all duration-300`}
+                      className={`h-2 md:h-3 rounded-full bg-gradient-to-r ${skill.color} transform-gpu will-change-transform`}
                     />
                   </div>
                 </motion.div>
               ))}
             </motion.div>
 
-            {/* Enhanced Call to Action */}
+            {/* Performance Optimized Call to Action */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: isMobile ? 20 : 40 }}
               animate={skillsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ 
-                duration: 0.8, 
-                delay: 1.5,
-                type: "spring",
-                stiffness: 100
+                duration: isMobile ? 0.5 : 0.8, 
+                delay: isMobile ? 0.8 : 1.5,
+                willChange: "transform, opacity"
               }}
-              className="text-center mt-16"
+              className="text-center mt-12 md:mt-16 transform-gpu"
             >
-             <motion.a
-  href="./Resume.pdf"
-  download="Bishnu_Prasad_Rath_Resume.pdf"
-  whileHover={{ 
-    scale: 1.05,
-    boxShadow: "0 20px 40px rgba(236, 72, 153, 0.3)"
-  }}
-  whileTap={{ scale: 0.95 }}
-  className="px-10 py-5 bg-gradient-to-r from-red-500 to-pink-600 text-white font-semibold rounded-2xl hover:shadow-2xl transition-all duration-300 text-lg relative overflow-hidden group inline-block"
->
-  <span className="relative z-10">Download Resume</span>
-  <motion.div
-    className="absolute inset-0 bg-gradient-to-r from-pink-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-  />
-</motion.a>
+              <motion.a
+                href="./Resume.pdf"
+                download="Bishnu_Prasad_Rath_Resume.pdf"
+                whileHover={!isMobile ? { 
+                  scale: 1.05,
+                  boxShadow: "0 20px 40px rgba(236, 72, 153, 0.3)"
+                } : {}}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-red-500 to-pink-600 text-white font-semibold rounded-xl md:rounded-2xl text-base md:text-lg relative overflow-hidden group inline-block transform-gpu will-change-transform"
+              >
+                <span className="relative z-10">Download Resume</span>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-pink-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                />
+              </motion.a>
               
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={skillsInView ? { opacity: 1 } : {}}
-                transition={{ delay: 2 }}
-                className="text-gray-400 text-lg mt-6"
+                transition={{ 
+                  delay: isMobile ? 1 : 2,
+                  willChange: "opacity"
+                }}
+                className="text-gray-400 text-base md:text-lg mt-4 md:mt-6"
               >
                 Let's build something amazing together!
               </motion.p>

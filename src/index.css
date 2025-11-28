@@ -181,3 +181,61 @@ img, video, iframe {
 .animate-slide-in {
   animation: slideIn 0.4s ease-out forwards;
 }
+
+/* Mobile-specific performance optimizations */
+@media (max-width: 768px) {
+  iframe[src*="spline"] {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    transform: translate3d(0,0,0);
+    backface-visibility: hidden;
+  }
+}
+
+/* Force 720p equivalent rendering on mobile */
+@media (max-width: 768px) {
+  .spline-wrapper {
+    /* Limit maximum resolution */
+    max-width: 1280px;
+    max-height: 720px;
+  }
+  
+  iframe[src*="spline"] {
+    /* Reduce rendering quality */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    transform: scale(1);
+    filter: blur(0.2px);
+  }
+  
+  /* Target the canvas inside iframe */
+  iframe[src*="spline"] canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 1280px;
+    max-height: 720px;
+  }
+}
+
+/* 480p Mobile Optimization - ADD this to your existing CSS */
+@media (max-width: 768px) {
+  .spline-wrapper {
+    /* 480p limits */
+    max-width: 854px;
+    max-height: 480px;
+  }
+  
+  iframe[src*="spline"] {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    filter: blur(0.5px); /* More blur for lower quality */
+  }
+}
+
+/* Extra optimization for very small screens */
+@media (max-width: 480px) {
+  iframe[src*="spline"] {
+    filter: blur(0.6px);
+  }
+}
