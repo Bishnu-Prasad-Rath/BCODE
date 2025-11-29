@@ -16,14 +16,6 @@ const ProjectsSlider = () => {
       thumb: "🚀"
     },
     {
-      title: "Raven-Fall",
-      technologies: ["HTML", "CSS", "JavaScript"],
-      liveLink: "https://valorant-inspired-website-using-htm.vercel.app",
-      githubLink: "https://github.com/Bishnu-Prasad-Rath/Valorant-inspired-website-using-HTML-CSS-JS",
-      bgColor: "from-blue-500/20 to-purple-600/20",
-      thumb: "📱"
-    },
-    {
       title: "2d shooting game",
       technologies: ["HTML", "CSS", "JavaScript", "Canvas"],
       liveLink: "https://canvas-game-phi.vercel.app",
