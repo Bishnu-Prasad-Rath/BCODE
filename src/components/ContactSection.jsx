@@ -25,7 +25,6 @@ const ContactSection = () => {
     });
   };
 
-  // 🌟 EmailJS + Toast integrated
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -65,7 +64,6 @@ const ContactSection = () => {
     });
   };
 
-  // 🌟 Contact info data
   const contactInfo = [
     {
       icon: (
@@ -122,7 +120,6 @@ const ContactSection = () => {
     }
   ];
 
-  // 🌟 Social Links
   const socialLinks = [
     {
       name: "GitHub",
@@ -190,7 +187,6 @@ const ContactSection = () => {
   return (
     <section id="contact" className="min-h-screen py-20 bg-black relative overflow-hidden">
 
-      {/* 🌟 Toast Notification */}
 {toast.show && (
   <div
     className={`
@@ -210,22 +206,18 @@ const ContactSection = () => {
     <span className="text-pink-300 bg-gradient-to-r from-pink-300 to-pink-200 bg-clip-text text-transparent">
       {toast.message}
     </span>
-    
-    {/* Subtle progress bar */}
+  
     <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gray-700/50 rounded-b-2xl overflow-hidden">
       <div className="h-full bg-gradient-to-r from-pink-400 to-pink-600 animate-progress" />
     </div>
   </div>
 )}
 
-
-      {/* Background Effects */}
       <div className="absolute top-10 left-10 w-96 h-96 bg-pink-600/10 rounded-full blur-3xl animate-pulse-slow"></div>
       <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl animate-pulse-slow"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        {/* Section Header */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
@@ -242,10 +234,8 @@ const ContactSection = () => {
           </p>
         </motion.div>
 
-        {/* Layout Grid */}
         <div className="grid lg:grid-cols-2 gap-12">
 
-          {/* LEFT FORM */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -257,7 +247,6 @@ const ContactSection = () => {
             </h3>
             <p className="text-gray-400 mb-6">Feel free to reach out for collaborations or just say hello!</p>
 
-            {/* 🌟 Form with EmailJS */}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-6">
                 <div>
@@ -311,7 +300,6 @@ const ContactSection = () => {
             </form>
           </motion.div>
 
-          {/* RIGHT INFORMATIONS */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -348,7 +336,6 @@ const ContactSection = () => {
               </div>
             </div>
 
-            {/* Social Links */}
             <div>
               <h3 className="text-2xl font-bold text-white mb-6">Follow Me On</h3>
 
@@ -373,7 +360,6 @@ const ContactSection = () => {
               </div>
             </div>
 
-            {/* Quick Note */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}

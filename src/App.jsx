@@ -12,7 +12,6 @@ export default function App() {
   return (
     <main className="min-h-screen bg-black overflow-hidden relative">
 
-      {/* Background glow effects - Responsive sizing */}
       <div className="absolute top-0 right-0 opacity-30 -z-10 animate-pulse-slow">
         <div className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-red-900 rounded-full blur-3xl"></div>
       </div>
@@ -23,7 +22,6 @@ export default function App() {
       <div className="relative z-10">
         <Header />
 
-        {/* Home Section - Improved mobile layout */}
         <section
           id="home"
           className="min-h-screen flex flex-col lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-20 pt-16 lg:pt-0"
@@ -77,7 +75,7 @@ export default function App() {
             </motion.div>
           </motion.div>
 
-          {/* Right Robot - Ultra small on mobile */}
+
           <motion.div
             className="lg:w-1/2 flex justify-center lg:justify-end items-center transform-gpu w-full"
             initial={{ opacity: 0 }}
@@ -94,20 +92,19 @@ export default function App() {
           </motion.div>
         </section>
 
-        {/* Projects Section with Custom Slider */}
+
         <section id="projects" className="min-h-screen">
           <ProjectsSlider />
         </section>
         
-        {/* Skills Section */}
+
         <SkillsSection />
 
-        {/* About Section - REPLACED PLACEHOLDER WITH ACTUAL COMPONENT */}
+
         <section id="about" className="min-h-screen">
           <AboutSection />
         </section>
 
-        {/* Contact Section - KEPT AS PLACEHOLDER */}
         <motion.section
           id="contact"
           className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-20 bg-gray-900/50"
@@ -121,7 +118,6 @@ export default function App() {
 </section>
         </motion.section>
 
-        {/* Floating Dock - hidden on mobile, visible on tablet & desktop */}
         <div className="hidden md:block">
           <FloatingDockDemo />
         </div>

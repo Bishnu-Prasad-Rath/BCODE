@@ -5,7 +5,6 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [isMobile, setIsMobile] = useState(false);
 
-  // Debounced mobile detection
   const checkMobile = useCallback(() => {
     setIsMobile(window.matchMedia("(max-width: 768px)").matches);
   }, []);
@@ -71,7 +70,6 @@ const Footer = () => {
     }
   ];
 
-  // Optimized animation variants for mobile
   const containerVariants = {
     hidden: { opacity: 0, y: isMobile ? 10 : 20 },
     visible: { 
@@ -117,7 +115,6 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-900/50 border-t border-gray-800 relative overflow-hidden transform-gpu">
-      {/* Background Effects - Reduced on mobile */}
       <div className={`absolute bottom-0 left-0 ${
         isMobile ? 'w-48 h-48' : 'w-72 h-72'
       } bg-red-600/5 rounded-full blur-3xl`}></div>
@@ -153,7 +150,6 @@ const Footer = () => {
               Let's build something amazing together!
             </p>
             
-            {/* Social Links - Optimized animations */}
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => (
                 <motion.a
@@ -180,7 +176,6 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Quick Links */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -219,7 +214,6 @@ const Footer = () => {
             </ul>
           </motion.div>
 
-          {/* Contact Info */}
           <motion.div
             initial="hidden"
             whileInView="visible"

@@ -29,12 +29,11 @@ const SkillsSection = () => {
   const containerRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
 
-  // Duplicate skills for seamless loop
   const duplicatedSkills = [...skills, ...skills, ...skills];
 
   return (
     <section id="skills" className="min-h-screen py-20 bg-black relative overflow-hidden">
-      {/* Enhanced Background glow effects */}
+
       <div className="absolute top-0 right-0 opacity-30 -z-10 animate-pulse-slow">
         <div className="w-[500px] h-[500px] bg-red-900 rounded-full blur-3xl"></div>
       </div>
@@ -60,13 +59,13 @@ const SkillsSection = () => {
           </p>
         </motion.div>
 
-        {/* Sliding Logo Marquee */}
+
         <div className="relative">
-          {/* Enhanced Gradient Overlays */}
+
           <div className="absolute left-0 top-0 w-40 h-full bg-gradient-to-r from-black via-black/80 to-transparent z-10"></div>
           <div className="absolute right-0 top-0 w-40 h-full bg-gradient-to-l from-black via-black/80 to-transparent z-10"></div>
           
-          {/* Marquee Container */}
+
           <div 
             ref={containerRef}
             className="overflow-hidden py-8"
@@ -96,7 +95,6 @@ const SkillsSection = () => {
                   }}
                   className="flex-shrink-0 group cursor-pointer relative"
                 >
-                  {/* Glow Effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-pink-600/20 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10"></div>
                   
                   <div className="bg-gray-900/60 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6 w-32 h-32 flex flex-col items-center justify-center gap-3 transition-all duration-300 group-hover:border-pink-500/80 group-hover:shadow-2xl group-hover:shadow-pink-500/40 relative z-10">
@@ -113,7 +111,6 @@ const SkillsSection = () => {
           </div>
         </div>
 
-        {/* Additional Static Skills Display */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -142,7 +139,6 @@ const SkillsSection = () => {
                 }}
                 className="group relative"
               >
-                {/* Glow Effect for Static Cards */}
                 <div className="absolute inset-0 bg-gradient-to-r from-red-500/15 to-pink-600/15 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10"></div>
                 
                 <div className="bg-gray-900/60 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6 text-center group-hover:border-pink-500/80 group-hover:shadow-2xl group-hover:shadow-pink-500/40 transition-all duration-300 relative z-10">
@@ -158,7 +154,6 @@ const SkillsSection = () => {
           </div>
         </motion.div>
 
-        {/* Enhanced Call to Action */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -210,7 +210,6 @@ const ProjectsSlider = () => {
                           ))}
                         </div>
                         
-                        {/* FIXED BUTTONS — OPEN LINKS CORRECTLY */}
                         <div className={`flex gap-3 justify-center lg:justify-start ${
                           isMobile ? 'gap-2 mt-2' : ''
                         }`}>

@@ -1,5 +1,5 @@
 import React from "react";
-import { FloatingDock } from "./ui/floating-dock"; // Changed to relative import
+import { FloatingDock } from "./ui/floating-dock"; 
 import {
   IconBrandGithub,
   IconBrandLinkedin,

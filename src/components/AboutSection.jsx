@@ -5,7 +5,6 @@ import { useState, useEffect, useCallback } from 'react';
 const AboutSection = () => {
   const [isMobile, setIsMobile] = useState(false);
 
-  // Debounced mobile detection
   const checkMobile = useCallback(() => {
     setIsMobile(window.matchMedia("(max-width: 768px)").matches);
   }, []);
@@ -24,7 +23,6 @@ const AboutSection = () => {
     };
   }, [checkMobile]);
 
-  // Optimized intersection observers with mobile thresholds
   const [headerRef, headerInView] = useInView({
     triggerOnce: true,
     threshold: isMobile ? 0.1 : 0.3,
@@ -55,7 +53,6 @@ const AboutSection = () => {
     { number: "5+", label: "Technologies" },
   ];
 
-  // Performance-optimized animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -134,7 +131,6 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="min-h-screen py-12 md:py-20 bg-black relative overflow-hidden transform-gpu">
-      {/* Performance-optimized Background Effects */}
       {!isMobile && (
         <>
           <motion.div
@@ -153,7 +149,6 @@ const AboutSection = () => {
       )}
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header Section - Performance Optimized */}
         <motion.div
           ref={headerRef}
           initial="hidden"
@@ -182,7 +177,6 @@ const AboutSection = () => {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-start">
-          {/* Left Column - Story with Mobile Optimizations */}
           <motion.div
             ref={storyRef}
             initial="hidden"
@@ -219,7 +213,6 @@ const AboutSection = () => {
               </motion.p>
             </motion.div>
 
-            {/* Stats Grid - Performance Optimized */}
             <motion.div
               variants={containerVariants}
               className="grid grid-cols-2 gap-4 md:gap-6 mt-8 md:mt-12 transform-gpu"
@@ -265,7 +258,6 @@ const AboutSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Skills with Performance Optimizations */}
           <motion.div
             ref={skillsRef}
             initial="hidden"
@@ -282,7 +274,6 @@ const AboutSection = () => {
               </p>
             </motion.div>
 
-            {/* Skills with Optimized Progress Bars */}
             <motion.div
               variants={containerVariants}
               className="space-y-6 md:space-y-8 transform-gpu"
@@ -332,7 +323,6 @@ const AboutSection = () => {
               ))}
             </motion.div>
 
-            {/* Performance Optimized Call to Action */}
             <motion.div
               initial={{ opacity: 0, y: isMobile ? 20 : 40 }}
               animate={skillsInView ? { opacity: 1, y: 0 } : {}}
