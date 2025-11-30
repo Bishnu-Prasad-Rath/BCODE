@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { useRef, useState } from "react";
-import { 
-  SiHtml5, 
-  SiCss3, 
-  SiJavascript, 
-  SiReact, 
-  SiNodedotjs, 
+import { useRef, useState, useMemo } from "react";
+import {
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiReact,
+  SiNodedotjs,
   SiExpress,
   SiTailwindcss,
   SiFigma,
@@ -13,7 +13,9 @@ import {
 import { FaPaintBrush } from "react-icons/fa";
 
 const SkillsSection = () => {
-  const skills = [
+
+
+  const skills = useMemo(() => [
     { name: "HTML5", icon: <SiHtml5 className="w-12 h-12" />, color: "text-orange-500" },
     { name: "CSS3", icon: <SiCss3 className="w-12 h-12" />, color: "text-blue-500" },
     { name: "JavaScript", icon: <SiJavascript className="w-12 h-12" />, color: "text-yellow-400" },
@@ -24,27 +26,30 @@ const SkillsSection = () => {
     { name: "Figma", icon: <SiFigma className="w-12 h-12" />, color: "text-purple-500" },
     { name: "Spline", icon: <FaPaintBrush className="w-12 h-12" />, color: "text-blue-400" },
     { name: "Canvas", icon: <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">C</div>, color: "text-white" },
-  ];
+  ], []);
+
+  const duplicatedSkills = useMemo(() => [...skills, ...skills], [skills]);
 
   const containerRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
 
-  const duplicatedSkills = [...skills, ...skills, ...skills];
+  const totalWidth = skills.length * 180; 
 
   return (
     <section id="skills" className="min-h-screen py-20 bg-black relative overflow-hidden">
 
-      <div className="absolute top-0 right-0 opacity-30 -z-10 animate-pulse-slow">
+      <div className="absolute top-0 right-0 opacity-30 -z-10 animate-pulse-slow transform-gpu">
         <div className="w-[500px] h-[500px] bg-red-900 rounded-full blur-3xl"></div>
       </div>
-      <div className="absolute bottom-0 left-0 opacity-25 -z-10 animate-pulse-slow">
+      <div className="absolute bottom-0 left-0 opacity-25 -z-10 animate-pulse-slow transform-gpu">
         <div className="w-[400px] h-[400px] bg-purple-900 rounded-full blur-3xl"></div>
       </div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-15 -z-10">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-15 -z-10 transform-gpu">
         <div className="w-[600px] h-[600px] bg-pink-900 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -59,29 +64,27 @@ const SkillsSection = () => {
           </p>
         </motion.div>
 
-
         <div className="relative">
 
-          <div className="absolute left-0 top-0 w-40 h-full bg-gradient-to-r from-black via-black/80 to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 w-40 h-full bg-gradient-to-l from-black via-black/80 to-transparent z-10"></div>
-          
+          <div className="absolute left-0 top-0 w-40 h-full bg-gradient-to-r from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 w-40 h-full bg-gradient-to-l from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
 
-          <div 
+          <div
             ref={containerRef}
-            className="overflow-hidden py-8"
+            className="overflow-hidden py-8 transform-gpu"
             onMouseEnter={() => setIsPlaying(false)}
             onMouseLeave={() => setIsPlaying(true)}
           >
             <motion.div
-              className="flex gap-12"
-              animate={{ 
-                x: isPlaying ? ["0%", "-50%"] : "0%"
+              className="flex gap-12 transform-gpu"
+              animate={{
+                x: isPlaying ? [0, -totalWidth] : 0
               }}
               transition={{
                 x: {
                   repeat: Infinity,
                   repeatType: "loop",
-                  duration: 20,
+                  duration: 60,
                   ease: "linear",
                 }
               }}
@@ -89,15 +92,16 @@ const SkillsSection = () => {
               {duplicatedSkills.map((skill, index) => (
                 <motion.div
                   key={`${skill.name}-${index}`}
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.1,
-                    y: -5
+                    y: -5,
+                    transition: { duration: 0.2 }
                   }}
-                  className="flex-shrink-0 group cursor-pointer relative"
+                  className="flex-shrink-0 group cursor-pointer relative transform-gpu"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-pink-600/20 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10"></div>
-                  
-                  <div className="bg-gray-900/60 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6 w-32 h-32 flex flex-col items-center justify-center gap-3 transition-all duration-300 group-hover:border-pink-500/80 group-hover:shadow-2xl group-hover:shadow-pink-500/40 relative z-10">
+
+                  <div className="bg-gray-900/60 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6 w-32 h-32 flex flex-col items-center justify-center gap-3 transition-all duration-300 group-hover:border-pink-500/80 group-hover:shadow-2xl group-hover:shadow-pink-500/40 relative z-10 transform-gpu">
                     <div className={`${skill.color} group-hover:scale-110 transition-transform duration-300`}>
                       {skill.icon}
                     </div>
@@ -129,19 +133,19 @@ const SkillsSection = () => {
                 key={skill.name}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
                   y: -5
                 }}
-                transition={{ 
-                  duration: 0.5, 
-                  delay: index * 0.1 
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.1
                 }}
-                className="group relative"
+                className="group relative transform-gpu"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-red-500/15 to-pink-600/15 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10"></div>
-                
-                <div className="bg-gray-900/60 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6 text-center group-hover:border-pink-500/80 group-hover:shadow-2xl group-hover:shadow-pink-500/40 transition-all duration-300 relative z-10">
+
+                <div className="bg-gray-900/60 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6 text-center group-hover:border-pink-500/80 group-hover:shadow-2xl group-hover:shadow-pink-500/40 transition-all duration-300 relative z-10 transform-gpu">
                   <div className={`${skill.color} mb-3 group-hover:scale-110 transition-transform duration-300`}>
                     {skill.icon}
                   </div>
@@ -161,7 +165,7 @@ const SkillsSection = () => {
           className="text-center mt-16"
         >
           <p className="text-gray-400 mb-6">Always learning, always building</p>
-          <button 
+          <button
             onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
             className="px-8 py-3 bg-gradient-to-r from-red-500 to-pink-600 text-white font-medium rounded-full hover:shadow-2xl hover:shadow-pink-500/50 transform hover:-translate-y-1 transition-all duration-300 relative group"
           >
@@ -169,6 +173,7 @@ const SkillsSection = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-600 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10"></div>
           </button>
         </motion.div>
+
       </div>
     </section>
   );
