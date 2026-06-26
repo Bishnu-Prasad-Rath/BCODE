@@ -1,49 +1,66 @@
-import Spline from '@splinetool/react-spline';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { useInView } from "react-intersection-observer";
+
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 export default function InteractiveRobot() {
   const [isMobile, setIsMobile] = useState(false);
   const splineRef = useRef(null);
 
-  useEffect(() => {
-    const mobile = window.matchMedia("(max-width: 768px)").matches;
-    setIsMobile(mobile);
-  }, []);
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.15,
+  });
 
   useEffect(() => {
-    const iframe = document.querySelector("iframe[src*='spline']");
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
 
-    if (!iframe) return;
+    const updateScreen = () => {
+      setIsMobile(mediaQuery.matches);
+    };
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        iframe.style.pointerEvents = entry.isIntersecting ? "auto" : "none";
-      },
-      { threshold: 0.2 }
-    );
+    updateScreen();
 
-    observer.observe(iframe);
-    return () => observer.disconnect();
+    mediaQuery.addEventListener("change", updateScreen);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateScreen);
+    };
   }, []);
 
-  const onLoad = useCallback((spline) => {
-    splineRef.current = spline;
+  const onLoad = useCallback(
+    (spline) => {
+      splineRef.current = spline;
 
-    if (isMobile && spline.setZoom) {
-      spline.setZoom(0.4);
-    }
-  }, [isMobile]);
+      // Keep your original mobile scaling
+      if (isMobile && spline.setZoom) {
+        spline.setZoom(0.4);
+      }
+    },
+    [isMobile]
+  );
 
   return (
-    <div className="w-full h-full flex items-center justify-center overflow-visible">
-      <Spline
-        scene={
-          isMobile
-            ? "https://prod.spline.design/GiQi22IVkiA-P3iv/scene.splinecode?low=1"
-            : "https://prod.spline.design/GiQi22IVkiA-P3iv/scene.splinecode"
-        }
-        onLoad={onLoad}
-      />
+    <div
+      ref={ref}
+      className="flex items-center justify-center w-full h-full overflow-visible"
+    >
+      {inView && (
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center w-full h-full">
+              <div className="text-white animate-pulse">
+                Loading Robot...
+              </div>
+            </div>
+          }
+        >
+          <Spline
+            scene="https://prod.spline.design/GiQi22IVkiA-P3iv/scene.splinecode"
+            onLoad={onLoad}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }
