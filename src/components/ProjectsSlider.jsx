@@ -51,8 +51,8 @@ const ProjectCard = memo(function ProjectCard({
       <div className="absolute inset-0 p-6 lg:p-8">
         {!isMobile && !expanded && (
           <div className="absolute inset-0 flex items-center justify-center transition-all duration-300">
-            <div className="writing-mode-vertical transform rotate-180">
-              <h3 className="bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent font-bold text-lg text-center tracking-wide">
+            <div className="transform rotate-180 writing-mode-vertical">
+              <h3 className="text-lg font-bold tracking-wide text-center text-transparent bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text">
                 {project.title}
               </h3>
             </div>
@@ -61,7 +61,7 @@ const ProjectCard = memo(function ProjectCard({
 
         {isMobile && !expanded && (
           <div className="absolute inset-0 flex items-center justify-start px-4 transition-all duration-300">
-            <h3 className="bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent font-bold text-lg">
+            <h3 className="text-lg font-bold text-transparent bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text">
               {project.title}
             </h3>
           </div>
@@ -82,7 +82,7 @@ const ProjectCard = memo(function ProjectCard({
                   isMobile ? "w-32 h-40" : "w-48 h-60"
                 }`}
               >
-                <div className="text-white text-center p-4">
+                <div className="p-4 text-center text-white">
                   <div
                     className={`bg-gradient-to-r from-red-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-3 ${
                       isMobile ? "w-12 h-12" : "w-14 h-14"
@@ -205,23 +205,23 @@ export default function ProjectsSlider() {
   );
 
   return (
-    <section className="min-h-screen py-12 sm:py-16 lg:py-20 bg-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12">
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-4 sm:gap-6">
+    <section className="min-h-screen py-12 bg-black sm:py-16 lg:py-20">
+      <div className="px-4 pb-8 mx-auto max-w-7xl sm:px-6 lg:px-8 sm:pb-12">
+        <div className="flex flex-col items-start justify-between gap-4 lg:flex-row lg:items-end sm:gap-6">
           <div className="w-full lg:w-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 text-center lg:text-left">
+            <h2 className="mb-3 text-2xl font-bold text-center text-white sm:text-3xl md:text-4xl lg:text-5xl sm:mb-4 lg:text-left">
               Featured{" "}
-              <span className="bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="text-transparent bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text">
                 Projects
               </span>
             </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl text-center lg:text-left mx-auto lg:mx-0">
+            <p className="max-w-2xl mx-auto text-base text-center text-gray-300 sm:text-lg lg:text-xl lg:text-left lg:mx-0">
               Here are some of my recent works that showcase my skills and
               creativity
             </p>
           </div>
 
-          <div className="controls flex gap-2 sm:gap-3 w-full lg:w-auto justify-center lg:justify-end">
+          <div className="flex justify-center w-full gap-2 controls sm:gap-3 lg:w-auto lg:justify-end">
             <button
               onClick={() => {
                 const next = Math.max(activeProject - 1, 0);
@@ -229,7 +229,7 @@ export default function ProjectsSlider() {
                 setHoveredProject(next);
               }}
               disabled={activeProject === 0}
-              className="nav-btn w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/80 hover:bg-pink-600 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 rounded-full flex items-center justify-center text-white text-lg sm:text-xl backdrop-blur-sm border border-gray-600"
+              className="flex items-center justify-center w-10 h-10 text-lg text-white transition-all duration-300 border border-gray-600 rounded-full nav-btn sm:w-12 sm:h-12 bg-gray-800/80 hover:bg-pink-600 disabled:opacity-30 disabled:cursor-not-allowed sm:text-xl backdrop-blur-sm"
             >
               ‹
             </button>
@@ -241,7 +241,7 @@ export default function ProjectsSlider() {
                 setHoveredProject(next);
               }}
               disabled={activeProject === projects.length - 1}
-              className="nav-btn w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/80 hover:bg-pink-600 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 rounded-full flex items-center justify-center text-white text-lg sm:text-xl backdrop-blur-sm border border-gray-600"
+              className="flex items-center justify-center w-10 h-10 text-lg text-white transition-all duration-300 border border-gray-600 rounded-full nav-btn sm:w-12 sm:h-12 bg-gray-800/80 hover:bg-pink-600 disabled:opacity-30 disabled:cursor-not-allowed sm:text-xl backdrop-blur-sm"
             >
               ›
             </button>
@@ -249,7 +249,7 @@ export default function ProjectsSlider() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div
           className={`track flex ${
             isMobile
@@ -276,7 +276,7 @@ export default function ProjectsSlider() {
 
       {/* Dots */}
       {!isMobile && (
-        <div className="dots flex justify-center gap-3 mt-8">
+        <div className="flex justify-center gap-3 mt-8 dots">
           {projects.map((_, index) => (
             <button
               key={index}
