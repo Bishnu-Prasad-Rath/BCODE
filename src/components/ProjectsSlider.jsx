@@ -186,6 +186,15 @@ export default function ProjectsSlider() {
         "https://github.com/Bishnu-Prasad-Rath/Canvas-Game/tree/main/Game-1",
       bgColor: "from-green-500/20 to-teal-600/20",
       thumb: "💼"
+    },
+    {
+      title: "YT_NEO",
+      technologies: ["React.js","Node.js","Express.js","MongoDB","Redis","BullMQ","Cloudinary"],
+      liveLink: "https://you-tube-theta-ten.vercel.app/",
+      githubLink:
+        "https://github.com/Bishnu-Prasad-Rath/YouTube",
+      bgColor: "from-green-500/20 to-teal-600/20",
+      thumb: "💼"
     }
   ];
 
