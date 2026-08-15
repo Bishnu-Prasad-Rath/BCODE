@@ -2,30 +2,61 @@ import { motion } from "framer-motion";
 import { useRef, useState, useMemo } from "react";
 import {
   SiHtml5,
-  SiCss3,
   SiJavascript,
+  SiTypescript,
   SiReact,
+  SiRedux,
   SiNodedotjs,
   SiExpress,
+  SiMongodb,
+  SiRedis,
+  SiSocketdotio,
+  SiDocker,
+  SiPostman,
+  SiGit,
   SiTailwindcss,
   SiFigma,
+  SiCplusplus,
+  SiJest,
+  SiPuppeteer,
+  SiPm2,
+  SiRust
 } from "react-icons/si";
 import { FaPaintBrush } from "react-icons/fa";
 
 const SkillsSection = () => {
-
-
   const skills = useMemo(() => [
-    { name: "HTML5", icon: <SiHtml5 className="w-12 h-12" />, color: "text-orange-500" },
-    { name: "CSS3", icon: <SiCss3 className="w-12 h-12" />, color: "text-blue-500" },
-    { name: "JavaScript", icon: <SiJavascript className="w-12 h-12" />, color: "text-yellow-400" },
+    // Core Frontend & Languages
     { name: "React", icon: <SiReact className="w-12 h-12" />, color: "text-cyan-400" },
+    { name: "JavaScript", icon: <SiJavascript className="w-12 h-12" />, color: "text-yellow-400" },
+    { name: "TypeScript", icon: <SiTypescript className="w-12 h-12" />, color: "text-blue-500" },
     { name: "Tailwind CSS", icon: <SiTailwindcss className="w-12 h-12" />, color: "text-cyan-500" },
+    { name: "Redux", icon: <SiRedux className="w-12 h-12" />, color: "text-purple-400" },
+    { name: "C++", icon: <SiCplusplus className="w-12 h-12" />, color: "text-blue-600" },
+
+    // Core Backend & Databases
     { name: "Node.js", icon: <SiNodedotjs className="w-12 h-12" />, color: "text-green-500" },
     { name: "Express.js", icon: <SiExpress className="w-12 h-12" />, color: "text-gray-400" },
+    { name: "MongoDB", icon: <SiMongodb className="w-12 h-12" />, color: "text-emerald-500" },
+    { name: "Redis", icon: <SiRedis className="w-12 h-12" />, color: "text-red-500" },
+    { name: "Socket.IO", icon: <SiSocketdotio className="w-12 h-12" />, color: "text-gray-200" },
+    { name: "BullMQ", icon: <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-inner">BMQ</div>, color: "text-white" },
+
+    // Infrastructure, DevOps & Testing
+    { name: "Docker", icon: <SiDocker className="w-12 h-12" />, color: "text-sky-400" },
+    { name: "PM2", icon: <SiPm2 className="w-12 h-12" />, color: "text-indigo-400" },
+    { name: "Postman", icon: <SiPostman className="w-12 h-12" />, color: "text-orange-500" },
+    { name: "Jest", icon: <SiJest className="w-12 h-12" />, color: "text-red-600" },
+    { name: "Puppeteer", icon: <SiPuppeteer className="w-12 h-12" />, color: "text-emerald-400" },
+    { name: "Artillery", icon: <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-inner">ART</div>, color: "text-white" },
+
+    // Fundamentals, Tools & Design
+    { name: "Git", icon: <SiGit className="w-12 h-12" />, color: "text-red-400" },
+    { name: "HTML5", icon: <SiHtml5 className="w-12 h-12" />, color: "text-orange-500" },
+    { name: "Rust", icon: <SiRust className="w-12 h-12" />, color: "text-orange-600" },
     { name: "Figma", icon: <SiFigma className="w-12 h-12" />, color: "text-purple-500" },
     { name: "Spline", icon: <FaPaintBrush className="w-12 h-12" />, color: "text-blue-400" },
-    { name: "Canvas", icon: <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">C</div>, color: "text-white" },
+    { name: "Canvas", icon: <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-inner">C</div>, color: "text-white" },
   ], []);
 
   const duplicatedSkills = useMemo(() => [...skills, ...skills], [skills]);
@@ -33,11 +64,12 @@ const SkillsSection = () => {
   const containerRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
 
+  // Adjusted width to account for the new items in the infinite scroll
   const totalWidth = skills.length * 180; 
 
   return (
     <section id="skills" className="min-h-screen py-20 bg-black relative overflow-hidden">
-
+      {/* Background Orbs */}
       <div className="absolute top-0 right-0 opacity-30 -z-10 animate-pulse-slow transform-gpu">
         <div className="w-[500px] h-[500px] bg-red-900 rounded-full blur-3xl"></div>
       </div>
@@ -49,7 +81,7 @@ const SkillsSection = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-
+        {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -64,8 +96,8 @@ const SkillsSection = () => {
           </p>
         </motion.div>
 
+        {/* Infinite Scroll Carousel */}
         <div className="relative">
-
           <div className="absolute left-0 top-0 w-40 h-full bg-gradient-to-r from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
           <div className="absolute right-0 top-0 w-40 h-full bg-gradient-to-l from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
 
@@ -84,14 +116,14 @@ const SkillsSection = () => {
                 x: {
                   repeat: Infinity,
                   repeatType: "loop",
-                  duration: 60,
+                  duration: 80, // Slightly slower duration to accommodate more items cleanly
                   ease: "linear",
                 }
               }}
             >
               {duplicatedSkills.map((skill, index) => (
                 <motion.div
-                  key={`${skill.name}-${index}`}
+                  key={`${skill.name}-scroll-${index}`}
                   whileHover={{
                     scale: 1.1,
                     y: -5,
@@ -102,7 +134,7 @@ const SkillsSection = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-pink-600/20 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10"></div>
 
                   <div className="bg-gray-900/60 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6 w-32 h-32 flex flex-col items-center justify-center gap-3 transition-all duration-300 group-hover:border-pink-500/80 group-hover:shadow-2xl group-hover:shadow-pink-500/40 relative z-10 transform-gpu">
-                    <div className={`${skill.color} group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`${skill.color} group-hover:scale-110 transition-transform duration-300 flex justify-center items-center`}>
                       {skill.icon}
                     </div>
                     <span className="text-white font-medium text-sm group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-red-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all duration-300">
@@ -115,6 +147,7 @@ const SkillsSection = () => {
           </div>
         </div>
 
+        {/* Core Competencies Grid (Now 24 Items -> 6x4) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -127,10 +160,10 @@ const SkillsSection = () => {
             </h3>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {skills.map((skill, index) => (
               <motion.div
-                key={skill.name}
+                key={`${skill.name}-grid`}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 whileHover={{
@@ -139,17 +172,17 @@ const SkillsSection = () => {
                 }}
                 transition={{
                   duration: 0.5,
-                  delay: index * 0.1
+                  delay: (index % 6) * 0.05 // Staggers based on column position
                 }}
                 className="group relative transform-gpu"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-red-500/15 to-pink-600/15 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10"></div>
 
-                <div className="bg-gray-900/60 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6 text-center group-hover:border-pink-500/80 group-hover:shadow-2xl group-hover:shadow-pink-500/40 transition-all duration-300 relative z-10 transform-gpu">
-                  <div className={`${skill.color} mb-3 group-hover:scale-110 transition-transform duration-300`}>
+                <div className="bg-gray-900/60 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6 text-center group-hover:border-pink-500/80 group-hover:shadow-2xl group-hover:shadow-pink-500/40 transition-all duration-300 relative z-10 transform-gpu h-full flex flex-col justify-center items-center">
+                  <div className={`${skill.color} mb-3 group-hover:scale-110 transition-transform duration-300 flex justify-center items-center`}>
                     {skill.icon}
                   </div>
-                  <h4 className="text-white font-semibold group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-red-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all duration-300">
+                  <h4 className="text-white font-semibold group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-red-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all duration-300 text-sm md:text-base whitespace-nowrap">
                     {skill.name}
                   </h4>
                 </div>
@@ -158,13 +191,14 @@ const SkillsSection = () => {
           </div>
         </motion.div>
 
+        {/* Footer / CTA */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           className="text-center mt-16"
         >
-          <p className="text-gray-400 mb-6">Always learning, always building</p>
+          <p className="text-gray-400 mb-6">Building robust architecture from end to end</p>
           <button
             onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
             className="px-8 py-3 bg-gradient-to-r from-red-500 to-pink-600 text-white font-medium rounded-full hover:shadow-2xl hover:shadow-pink-500/50 transform hover:-translate-y-1 transition-all duration-300 relative group"
