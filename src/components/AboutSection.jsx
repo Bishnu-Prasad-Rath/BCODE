@@ -334,8 +334,8 @@ const AboutSection = () => {
               className="text-center mt-12 md:mt-16 transform-gpu"
             >
               <motion.a
-                href="./Resume.pdf"
-                download="Bishnu_Prasad_Rath_Resume.pdf"
+                href="/Bishnu_Resume.pdf"
+                download="Bishnu_Resume.pdf"
                 whileHover={!isMobile ? { 
                   scale: 1.05,
                   boxShadow: "0 20px 40px rgba(236, 72, 153, 0.3)"
