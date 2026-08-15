@@ -181,7 +181,7 @@ export default function ProjectsSlider() {
     {
       title: "2d shooting game",
       technologies: ["HTML", "CSS", "JavaScript", "Canvas"],
-      liveLink: "https://canvas-game-phi.vercel.app",
+      liveLink: "https://shooting-game-gules.vercel.app/",
       githubLink:
         "https://github.com/Bishnu-Prasad-Rath/Canvas-Game/tree/main/Game-1",
       bgColor: "from-green-500/20 to-teal-600/20",
