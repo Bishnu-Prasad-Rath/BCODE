@@ -98,7 +98,7 @@ export default function App() {
                 View My Work
               </button>
 
-              <a href="/Resume.pdf" download>
+              <a href="../Bishnu_Resume(2).pdf" download>
                 <button className="px-6 py-3 sm:px-8 sm:py-3 border-2 border-pink-500 text-pink-400 font-medium rounded-full hover:bg-pink-500 hover:text-white transition-all duration-300 text-sm sm:text-base">
                   Download CV
                 </button>
