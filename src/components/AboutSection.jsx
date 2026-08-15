@@ -33,10 +33,11 @@ const AboutSection = () => {
 
   const skills = [
     { name: "React", level: 90, color: "from-cyan-500 to-blue-500" },
-    { name: "JavaScript", level: 85, color: "from-yellow-400 to-orange-500" },
-    { name: "Node.js", level: 80, color: "from-green-500 to-emerald-500" },
+    { name: "Node.js", level: 85, color: "from-green-500 to-emerald-500" },
+    { name: "Express", level: 82, color: "from-gray-400 to-gray-600" },
+    { name: "MongoDB", level: 80, color: "from-emerald-400 to-green-600" },
     { name: "Tailwind CSS", level: 88, color: "from-teal-400 to-cyan-500" },
-    { name: "Express", level: 75, color: "from-yellow-400 to-yellow-600" },
+    { name: "Rust", level: 75, color: "from-orange-500 to-red-600" },
   ];
 
   const stats = [
@@ -52,7 +53,7 @@ const AboutSection = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: isMobile ? 0 : 0.15, // Disable heavy staggering on mobile
+        staggerChildren: isMobile ? 0 : 0.15, 
         delayChildren: 0.1
       }
     }
@@ -81,7 +82,6 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="min-h-screen py-12 md:py-20 bg-black relative overflow-hidden">
-      {/* Background elements conditionally rendered to save VRAM on mobile */}
       {!isMobile && (
         <div className="absolute inset-0 pointer-events-none z-0">
           <motion.div
@@ -125,27 +125,27 @@ const AboutSection = () => {
                 My <span className="bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent">Journey</span>
               </h3>
               
-              {/* Grouped paragraphs into one animated container to reduce DOM composite layers */}
               <div className="space-y-4 md:space-y-6 text-gray-300 text-base md:text-lg leading-relaxed px-4 md:px-0">
                 <p>
                   Hello! I'm <span className="text-pink-400 font-semibold">Bishnu</span>, a passionate Full Stack Developer 
-                  with a love for creating beautiful and functional web applications. My journey in web development 
-                  started from B.Tech 1st year, and since then I've been constantly learning and evolving.
+                  with a love for creating robust and functional web applications. Currently in my 4th year of B.Tech, 
+                  my journey has been a constant pursuit of learning and pushing the boundaries of what I can build.
                 </p>
                 <p>
-                  I specialize in modern technologies like <span className="text-red-400 font-medium">React</span>, <span className="text-blue-400 font-medium">Node.js</span>, 
-                  and <span className="text-cyan-400 font-medium">Tailwind CSS</span>. I believe in writing clean, efficient code 
-                  and creating user experiences that are both visually appealing and highly functional.
+                  I specialize in the <span className="text-emerald-400 font-medium">MERN Stack</span> and modern tools 
+                  like <span className="text-cyan-400 font-medium">Tailwind CSS</span>. Right now, I am diving deeply into <span className="text-orange-500 font-medium">Rust</span> and 
+                  advanced backend concepts to master the art of building highly scalable, distributed systems.
                 </p>
                 <p>
-                  When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, 
-                  or working on personal projects that challenge my skills and creativity.
+                  My goal isn't just to be an average full-stack engineer. I am actively working to build production-level 
+                  web applications capable of handling <span className="text-purple-400 font-medium">1 million requests per second</span>, 
+                  focusing on flawless architecture, performance optimization, and seamless user experiences.
                 </p>
               </div>
 
               {/* Stats Grid */}
               <div className="grid grid-cols-2 gap-4 md:gap-6 mt-8 md:mt-12">
-                {stats.map((stat, index) => (
+                {stats.map((stat) => (
                   <motion.div
                     key={stat.label}
                     variants={itemVariants}
