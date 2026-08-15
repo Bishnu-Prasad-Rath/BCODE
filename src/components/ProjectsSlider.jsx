@@ -172,7 +172,7 @@ export default function ProjectsSlider() {
       title: "MegaBlog.IO",
       technologies: ["React", "TailwindCSS", "Appwrite", "TinyMCE"],
       liveLink:
-        "https://react-from-begginers-to-advance-lev.vercel.app",
+        "https://megablog-appwrite-react.vercel.app/",
       githubLink:
         "https://github.com/Bishnu-Prasad-Rath/React-from-begginers-to-advance-level/tree/main/12MegaBlog",
       bgColor: "from-red-500/20 to-pink-600/20",
