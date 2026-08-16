@@ -53,7 +53,7 @@ export function FloatingDockDemo() {
       icon: (
         <IconFileText className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "/resume.pdf",
+      href: "/Bishnu_Resume.pdf",
     },
     {
       title: "GitHub",
