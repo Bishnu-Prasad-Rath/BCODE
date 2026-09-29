@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="neonGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF2E7E" />
+      <stop offset="100%" stop-color="#8B5CF6" />
+    </linearGradient>
+  </defs>
+
+  <!-- Pure Black Background -->
+  <rect width="64" height="64" rx="14" fill="#000000" />
+
+  <!-- Modern Geometric 'B' with refined weight -->
+  <g fill="none" stroke="url(#neonGlow)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Vertical Spine -->
+    <line x1="22" y1="16" x2="22" y2="48" />
+    <!-- Top Loop -->
+    <path d="M22 16h11a8 8 0 0 1 8 8v0a8 8 0 0 1-8 8H22" />
+    <!-- Bottom Loop -->
+    <path d="M22 32h13a8 8 0 0 1 8 8v0a8 8 0 0 1-8 8H22" />
+  </g>
+</svg>
